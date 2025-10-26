@@ -1,8 +1,9 @@
 version: "3.8"
 
 services:
+  # Backend - Spring Boot application
   backend:
-    build: ./DockerfileSimpleApi/simpleapi
+    build: ./DockerfileSimpleApi
     container_name: simpleapi
     ports:
       - "8080:8080"
@@ -10,19 +11,23 @@ services:
       - database
     networks:
       - app-network-v2
+
+  # Database - PostgreSQL
   database:
     image: postgres:14
     container_name: db
     environment:
-      POSTGRES_USER: usr
-      POSTGRES_PASSWORD: pwd
-      POSTGRES_DB: db
+      POSTGRES_USER: simpleapi
+      POSTGRES_PASSWORD: simpleapi
+      POSTGRES_DB: simpleapi
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - app-network-v2
+
+  # HTTP server / Reverse proxy - Nginx
   httpd:
     build: ./DockerfileHttpServer
     container_name: nginx-proxy
@@ -33,9 +38,11 @@ services:
     networks:
       - app-network-v2
 
+# Define existing custom network
 networks:
   app-network-v2:
     external: true
 
+# Data persistence for PostgreSQL
 volumes:
   db-data:

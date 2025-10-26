@@ -75,3 +75,70 @@ Tell Docker how to start the app
 1-5 Why do we need a reverse proxy?
 
 We need a reverse proxy to keep our back-end hidden and secured, in fact, thanks to a reverse proxy, also compared as the middleware between the user and the back-end, it allow users to request data from a unique entry point. The reverse proxy will first capture the user request and according to its request transfer it to its appropriate back-end service. Once, it has retrived, it will send it back to the user.
+
+1-6 Why is docker-compose so important?
+
+Docker Compose is important because it allows you to define and run multiple containers easily using a single configuration file (docker‑compose.yml) and command.
+
+1-7 Document docker-compose most important commands
+
+docker compose up	Start all services defined in the docker‑compose.yml file
+docker compose up -d	Start in detached mode (in background)
+docker compose up --build	Build images before starting containers
+docker compose down	Stop and remove the containers, network, and default resources
+docker compose stop	Pause the running containers without removing them
+docker compose start	Restart previously stopped containers
+docker compose ps	List all containers currently managed by the compose file
+docker compose logs -f	Display real‑time logs for all services
+docker compose build	(Re)build all images defined in the compose file
+
+1-8 Document your docker-compose.yml file 
+
+version: "3.8"
+
+services:
+  # Backend - Spring Boot application
+  backend:
+    build: ./DockerfileSimpleApi
+    container_name: simpleapi
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - app-network-v2
+
+  # Database - PostgreSQL
+  database:
+    image: postgres:14
+    container_name: db
+    environment:
+      POSTGRES_USER: simpleapi
+      POSTGRES_PASSWORD: simpleapi
+      POSTGRES_DB: simpleapi
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network-v2
+
+  # HTTP server / Reverse proxy - Nginx
+  httpd:
+    build: ./DockerfileHttpServer
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network-v2
+
+# Define existing custom network
+networks:
+  app-network-v2:
+    external: true
+
+# Data persistence for PostgreSQL
+volumes:
+  db-data:
