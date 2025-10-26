@@ -142,3 +142,24 @@ networks:
 # Data persistence for PostgreSQL
 volumes:
   db-data:
+
+1-9 Document your publication commands and published images in Docker Hub
+
+# Log in to your Docker Hub account
+docker login
+
+# Tag the backend image
+docker tag efrei_docker-backend leanpenhchakrithchea/simpleapi:1.0
+
+# Push the backend image
+docker push leanpenhchakrithchea/simpleapi:1.0
+
+# Tag the reverse proxy (Nginx) image
+docker tag efrei_docker-httpd leanpenhchakrithchea/nginx-proxy:1.0
+
+# Push your reverse proxy image
+docker push leanpenhchakrithchea/nginx-proxy:1.0
+
+1-10 Why do we put our images into an online repo?
+
+So they can be shared, reused and deployed from anywhere.
