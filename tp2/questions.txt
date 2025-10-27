@@ -8,3 +8,8 @@ We need to secure variables to avoid any people to see our sensitive credentials
 
 2-3 Why did we put needs: build-and-test-backend on this job? Maybe try without this and you will see!
 
+We put need: build-and-test-backend on this job because we want to make sure that the previous job has worked and then we can run the next job. If we try without the previous job, it won't work since the next job depends on the success of the previous job.
+
+2-4 For what purpose do we need to push docker images?
+
+We push Docker images to Docker Hub so our application can be shared, deployed, and reused easily anywhere.
