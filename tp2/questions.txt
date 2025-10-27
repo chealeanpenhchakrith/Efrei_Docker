@@ -2,4 +2,9 @@
 
 Testcontainers are tools that is used to test app by using temporary docker container.
 
+2-2 For what purpose do we need to use secured variables?
+
+We need to secure variables to avoid any people to see our sensitive credentials in the code.
+
+2-3 Why did we put needs: build-and-test-backend on this job? Maybe try without this and you will see!
 
