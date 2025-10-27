@@ -1,0 +1,8 @@
+all:
+  vars:
+    ansible_user: admin
+    ansible_ssh_private_key_file: /Users/rithchea/Downloads/id_rsa
+  children:
+    prod:
+      hosts:
+        leanpenhchakrith.chea.takima.cloud:
