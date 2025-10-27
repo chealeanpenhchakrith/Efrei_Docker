@@ -32,7 +32,7 @@ jobs:
         working-directory: tp1/.vscode/DockerfileSimpleApi/simpleapi
 
       - name: Run SonarCloud analysis
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=chealeanpenhchakrith -Dsonar.organization=Chea Leanpenhchakrith -Dsonar.host url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/.vscode/DockerfileSimpleApi/simpleapi/pom.xml
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker -Dsonar.organization=chealeanpenhchakrith -Dsonar.host url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/.vscode/DockerfileSimpleApi/simpleapi/pom.xml
 
   # define job to build and publish docker image
   build-and-push-docker-image:
