@@ -69,3 +69,6 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-proxy:latest
           push: ${{ github.ref == 'refs/heads/main' }}
           #
+
+      - name: Run SonarCloud analysis
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=<chealeanpenhchakrith> -Dsonar.organization=<Chea Leanpenhchakrith> -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/DockerfileSimpleApi/pom.xml
