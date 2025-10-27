@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
   # Backend - Spring Boot application
   backend:
-    build: ./DockerfileSimpleApi
+    build: ./DockerfileSimpleApi/simpleapi
     container_name: simpleapi
     ports:
       - "8080:8080"
