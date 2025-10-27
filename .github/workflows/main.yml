@@ -51,20 +51,20 @@ jobs:
       - name: Build image and push backend
         uses: docker/build-push-action@v6
         with:
-          context: DockerfileSimpleApi/simpleapi
+          context: tp1/.vscode/DockerfileSimpleApi/simpleapi
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
         uses: docker/build-push-action@v6
         with:
-          context: DockerfileDatabase
+          context: tp1/.vscode/DockerfileDatabase
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build and push nginx-proxy
         uses: docker/build-push-action@v6
         with:
-          context: DockerfileHttpServer
+          context: tp1/.vscode/DockerfileHttpServer
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-proxy:latest
           push: ${{ github.ref == 'refs/heads/main' }}
