@@ -6,18 +6,13 @@ on:
   push: # Runs when you push code to branches:
     branches:
       - main
-      - tp1
-      - tp2
+      - develop
   pull_request: # Also runs when a pull request is opened
 
 # Define the list of jobs in this workflow
 jobs:
   test-backend: # Our only job: build & test the backend
     runs-on: ubuntu-24.04 # Use GitHub's Ubuntu virtual machine
-
-    defaults:
-      run:
-        working-directory: tp1/.vscode/DockerfileSimpleApi/simpleapi # Folder that contains pom.xml
 
     steps:
       # Step 1: Checkout the code from your GitHub repo into the runner
@@ -34,3 +29,4 @@ jobs:
       # Step 3: Build and test the project using Maven
       - name: Build and test with Maven
         run: mvn clean verify # clean removes old builds, verify compiles/tests
+        working-directory: tp1/.vscode/DockerfileSimpleApi/simpleapi
