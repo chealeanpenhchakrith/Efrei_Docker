@@ -12,8 +12,9 @@ on:
 jobs:
   test-backend:
     runs-on: ubuntu-24.04
-    run:
-      working-directory: DockerfileSimpleApi/simpleapi
+    defaults:
+      run:
+        working-directory: DockerfileSimpleApi/simpleapi
 
     steps:
       # Step 1: Checkout your GitHub code
