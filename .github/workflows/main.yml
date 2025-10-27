@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     defaults:
       run:
-        working-directory: DockerfileSimpleApi/simpleapi # 👈 this line is critical!
+        working-directory: tp1/DockerfileSimpleApi/simpleapi # 👈 this line is critical!
 
     steps:
       - name: Checkout repository
