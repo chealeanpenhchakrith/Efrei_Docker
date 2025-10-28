@@ -35,20 +35,22 @@ jobs:
       #   run: mvn -B verify sonar:sonar -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker -Dsonar.organization=chealeanpenhchakrith -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/.vscode/DockerfileSimpleApi/simpleapi/pom.xml
 
   sonarcloud-analysis:
-    runs-on: ubuntu-24.04
-    needs: test-backend
-    steps:
-      - uses: actions/checkout@v4
+  needs: test-backend
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "21"
+  runs-on: ubuntu-24.04
+  needs: test-backend
+  steps:
+    - uses: actions/checkout@v4
 
-      - name: Analyze with SonarCloud
-        working-directory: "tp1/.vscode/DockerfileSimpleApi/simpleapi"
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker -Dsonar.organization=chealeanpenhchakrith -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/.vscode/DockerfileSimpleApi/simpleapi/pom.xml
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: "21"
+
+    - name: Analyze with SonarCloud
+      working-directory: "tp1/.vscode/DockerfileSimpleApi/simpleapi"
+      run: mvn -B verify sonar:sonar -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker -Dsonar.organization=chealeanpenhchakrith -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/.vscode/DockerfileSimpleApi/simpleapi/pom.xml
 
   # define job to build and publish docker image
   build-and-push-docker-image:
@@ -87,4 +89,3 @@ jobs:
           context: tp1/.vscode/DockerfileHttpServer
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-proxy:latest
           push: ${{ github.ref == 'refs/heads/main' }}
-          #
