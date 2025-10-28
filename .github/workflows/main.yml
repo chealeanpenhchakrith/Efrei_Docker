@@ -48,10 +48,8 @@ jobs:
           java-version: "21"
 
       - name: Analyze with SonarCloud
-        working-directory: tp1/DockerfileSimpleApi # 👈 relative path
+        working-directory: "tp1/.vscode/DockerfileSimpleApi" # ✅ correct path now
         run: |
-          pwd
-          ls -la
           mvn -B verify sonar:sonar \
             -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker \
             -Dsonar.organization=chealeanpenhchakrith \
