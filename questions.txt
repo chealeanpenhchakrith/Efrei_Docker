@@ -1,0 +1,38 @@
+3-1 Document your inventory and base commands
+
+This is the inventory file, basically it defines the way to connect to the server with sensitive credentials.
+
+all: # defines the root group for all hosts
+  vars: # contains variables (SSH user and key path)
+    ansible_user: admin
+    ansible_ssh_private_key_file: /path/to/private/key
+  children:
+    prod:
+      hosts:
+        leanpenhchakrith.chea.takima.cloud:
+
+Base commands: 
+
+Ping test connection: ansible all -i inventories/setup.yml -m ping
+
+Get OS distribution info: ansible all -i inventories/setup.yml -m setup -a "filter=ansible_distribution*"
+
+Remove Apache2 from the remote host:
+ansible all -i inventories/setup.yml -m apt -a "name=apache2 state=absent" --become
+
+3-2 Document your playbook
+
+This is the playbook.yml
+
+- hosts: all
+  become: true
+  gather_facts: true
+
+  roles:
+    - docker
+
+Basically, here we are giving instructions to configure the server, in fact we're creating a role that has a unique goal : create docker. The instructions for docker installation are stored tp3/my-project/ansible/roles/docker/tasks/main.yml.
+
+Create 2 networks : 
+
+Http - API - DB, Creer un .env

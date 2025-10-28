@@ -1,0 +1,13 @@
+- name: Run application container
+  docker_container:
+    name: my_app
+    image: leanpenhchakrithchea/database:latest
+    restart_policy: always
+    ports:
+      - "8080:8080"
+    env:
+      DATABASE_URL: postgres://myuser:mypassword@my_database/mydb
+      APP_ENV: production
+    networks:
+      - name: my_app_network_v3
+    state: started

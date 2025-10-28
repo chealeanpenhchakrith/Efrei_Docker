@@ -1,0 +1,18 @@
+- name: Copy nginx.conf to remote host
+  copy:
+    src: nginx.conf
+    dest: /home/admin/nginx.conf
+    mode: "0644"
+
+- name: Run Nginx reverse proxy container
+  docker_container:
+    name: my_proxy
+    image: leanpenhchakrithchea/nginx-proxy:latest
+    restart_policy: always
+    ports:
+      - "80:80"
+    volumes:
+      - /home/admin/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - name: my_app_network_v3
+    state: started
