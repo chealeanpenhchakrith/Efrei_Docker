@@ -33,3 +33,6 @@ This is the playbook.yml
 
 Basically, here we are giving instructions to configure the server, in fact we're creating a role that has a unique goal : create docker. The instructions for docker installation are stored tp3/my-project/ansible/roles/docker/tasks/main.yml.
 
+Create 2 networks : 
+
+Http - API - DB, Creer un .env

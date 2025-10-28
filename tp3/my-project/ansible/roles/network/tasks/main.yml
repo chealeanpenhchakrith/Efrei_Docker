@@ -1,0 +1,5 @@
+- name: Create custom Docker network
+  docker_network:
+    name: my_app_network_v3
+    driver: bridge
+    state: present

@@ -1,7 +1,6 @@
 FROM nginx:alpine
+RUN apk add --no-cache gettext
 
-# Copy web page
-COPY index.html /usr/share/nginx/html/index.html
+COPY nginx.conf /etc/nginx/templates/nginx.template
 
-# Copy our custom Nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
+CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/templates/nginx.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"]
