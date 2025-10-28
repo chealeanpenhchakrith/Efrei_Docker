@@ -48,8 +48,12 @@ jobs:
           java-version: "21"
 
       - name: Analyze with SonarCloud
-        working-directory: "tp1/.vscode/DockerfileSimpleApi/simpleapi"
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker -Dsonar.organization=chealeanpenhchakrith -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file tp1/.vscode/DockerfileSimpleApi/simpleapi/pom.xml
+        working-directory: "tp1/DockerfileSimpleApi"
+        run: mvn -B verify sonar:sonar \
+          -Dsonar.projectKey=chealeanpenhchakrith_Efrei_Docker \
+          -Dsonar.organization=chealeanpenhchakrith \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
   # define job to build and publish docker image
   build-and-push-docker-image:
